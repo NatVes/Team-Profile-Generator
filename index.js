@@ -131,10 +131,20 @@ async function optionsQA() {
     await optionsQA();          
 }
 
+function writeToFile(data) {  
+    const dir = "./output";
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+    }  
+    fs.writeFile(outputPath, render(data), (error) =>
+        error ? console.error('Error writing HTML file: ', error) : console.log('HTML file generated successfully')
+    )    
+}
+
 async function init() {
     await managerQA();
     await optionsQA();
-    console.log(team);    
+    writeToFile(team);    
 }
 
 init();
